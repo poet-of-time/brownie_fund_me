@@ -1,0 +1,31 @@
+dependencies:
+ #- <organization/repo>@<version>
+ - smartcontractkit/chainlink-brownie-contracts@0.4.0
+ # then we need to explain the @chainlink in the imports of the fund_me
+compiler:
+  solc:
+    remappings:
+      - '@chainlink=smartcontractkit/chainlink-brownie-contracts@0.4.0'
+dotenv: .env
+networks:
+  # you might have noticed that when running brownie, sometimes you use the --network flag
+  # and sometime you dont. that's because brownie automatically puts a default network to use
+  # by default, this is "development" and you don't necessarily have to input it into
+  # the networks list. but if you wanted to change the default network, you can add it,
+  # and change the default like so.
+  default: development #this is the equivalent of running brownie test --network development
+  rinkeby:
+    eth_usd_price_feed: '0x8A753747A1Fa494EC906cE90E9f37563A8AF630e'
+    verify: True
+  mainnet-fork:
+    eth_usd_price_feed: '0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419'
+    verify: False
+  development:
+    verify: False
+  ganache-local:
+  #if you close the ganache chain, all of the contracts will be lost
+  #so you wont be able to interact with them again, so 
+  # to account for this delete file 5777 from deployments, and entry 5777 from map.json in deployments
+    verify: False
+wallets:
+  from_key: ${PRIVATE_KEY}
