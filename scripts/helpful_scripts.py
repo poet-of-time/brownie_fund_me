@@ -21,9 +21,6 @@ def get_account():
 def deploy_mocks():
     print(f"The active network is {network.show_active()}")
     print("Deploying Mocks...")
-    # you don't need to deploy a new mock if there is always a mock that is deployed
-    # so this will only deploy if there hasn't always been a mock deployed, hence the <= 0
-    # deploying mocks is something that is done pretty frequently so you can make it a function
     print(len(MockV3Aggregator))
     if len(MockV3Aggregator) <= 0:
         MockV3Aggregator.deploy(DECIMALS, STARTING_PRICE, {"from":get_account()})
